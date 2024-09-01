@@ -1,0 +1,44 @@
+* IDEAS ICLC
+This is a collection of my ideas for the ICLC paper I'm planning. Its going to be a short one (2-4 pages). Maybe accompanied by a performance.
+
+** title
+NAN (not-a-notation) - are petri-nets a suitable frame work for a live-coding notation?
+
+** motivation and scope
+- liveness of live coding performances might be done by playing from scratch
+- others like to prepare some parts, phrases, songs and use them as a frame to improvise on
+- very rarely, also the audience is included
+*** prepared parts status-quo
+- when using prepared parts, there is no classical notation system available to use in order to describe a piece/song
+- some experimental composers such as Cage or Reich have been using their own systems (cite work here)
+- but nothing common has been available for live coding purposes (check LIT here)
+- simple, own approaches of NaN 0.1 refered here
+*** scope of this work
+- the goal is to develop a minimal notation for performing live coding
+- it should be minimal in order to suit the very different needs and approaches of different artists, should lower the barrierer of having to learn a new language, should be abstract in order to use in different contexts, languages and applications, more like a meta-langauage, should be visiably well readable to be conceived well in a live environment, might be nice to have it work on paper and on screen, ideally constructed as an interpretatble meta language which can be automated in code
+- include, embrace interaction of an audience with (prepared) live coding pieces
+- make a concept sketch here
+** experimental work
+
+*** Petri nets as a suggestion
+- Petri nets are an abstract way of representing flow of information similar to a state machine (LIT)
+- PN are abstract and very concise
+- PN have no inherent temporal dependency but can be enhanced by it 
+- PN have been used to represent music before (Musimathics and Paper!)
+- PN consist of 'places', 'transitions' and 'arcs' where
+  - P hold a state or can be the bottleneck to enable/prenvent the flow
+  - T trigger actions and control
+  - A deliver auxilliary information
+- SKETCH here!
+*** minimal case study - 1 performer onyl
+- in a minimal example I write a small piece (drums and melody) which can performed with two different patterns and I trigger the pattern in between and maybe also the pitch (piano?)
+*** minimal case study - 2 midi input from audience
+- same as befor but triggered from audience
+** discussion
+- what is the experience with it and what is maybe not working so great?
+** summary & outlook
+- answer question from the beginning
+- give an outlook to a implementation independent from Haskell --> maybe pure data which is visual and can send OSC messages to any other system
+- make clear that this is a very vague proposal which is dependent on others to join in
+- proposed goals: abstract, minimal and accessable
+- give link to github project

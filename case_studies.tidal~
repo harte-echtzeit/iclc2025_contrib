@@ -1,0 +1,11 @@
+-- a simple case study for the petri net >> notation test
+
+
+-- a simple track
+
+-- a drum kit
+
+d1 $ stack[
+  sometimes (echo 4 0.1 0.5) $ s "cpu2:0*4" # gain "1 0.8 1 0.8",
+  s "cpu2:3(5,8)",
+  s "clubkick ~ clubkick ~" # gain 0.8]

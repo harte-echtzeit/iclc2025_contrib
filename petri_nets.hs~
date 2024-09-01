@@ -1,0 +1,3 @@
+-- some tests to work with petri nets
+
+place num, max_num = if num == max_num then print True
