@@ -4,11 +4,14 @@
 -- a simple track
 
 -- a drum kit
-d1 $ stack[
-  sometimes (echo 4 0.3 0.8) $ s "cpu2:0*4" # gain "1 0.8 1 0.8",
+d1 $ fast 1.25
+  $ stack[
+  -- sometimes (echo 4 0.3 0.8) $
+  s "cpu2:0*4" # gain "1 0.8 1 0.8",
   s "cpu2:3(5,8)",
   s "clubkick ~ clubkick ~" # gain 0.8]
   # gain 0.7
+  -- # comb (iclc/(pat2*9))
 
 let pat = "3 4 2 5"
 
@@ -18,14 +21,24 @@ let iclc = "9 3 12 3"
 
 let pat2 = "2 0 2 5"
 
+let iclc2 = [9,3,12,3]
+    pat23 = [2,0,2,5]
+
 -- a bass line
-d2 $ fast 1.5
-  -- $ note (squeeze "0 1" [pat1, pat2])
-  -- $ arp "updown"
-  $ note iclc
+d2 $ fast 1
+  $ note (squeeze "0 1" [iclc,pat2])
+  -- $ arp "downup"
+  -- $ note (pat2 <> iclc)
   # s "bass3"
   # cut 1
-  # fshift "<100 80 50>"
+  -- # fshift "<100 80 50>"
   # gain 0.9
+  # room (range 0.1 0.4 sine)
+  # pan (fast 2 $ perlin)
 
 $ arp "updown"
+
+hush
+
+
+listToPat (zip pat23 iclc2)

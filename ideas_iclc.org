@@ -2,7 +2,11 @@
 This is a collection of my ideas for the ICLC paper I'm planning. Its going to be a short one (2-4 pages). Maybe accompanied by a performance.
 
 ** title
-NAN (not-a-notation) - are petri-nets a suitable frame work for a live-coding notation?
+NaN (Not-a-Notation) - can petri-nets be utilized as an interactive notation for live coding?
+
+** submitted abstract (2024-09-22)
+Usually, the "liveness" in live coding performances is either done by playing from scratch or by utilizing some prepared parts/phrases which are used by the artists to alter or improvise on. Very rarely, input from audience is included.
+This work will explore if and how petri-nets can be utilized as an interface for external input. It will investigate how a meta-language based on petri nets can help to control the flow of a live coding performance, alter its structure and patterns, visualize it and more abstractly serve as a notation. It will be analyzed how it can aid an artist in writing a notation for tracks while also maintaining flexibility for external inputs like an audience, situations and instruments. After an introduction to petri nets, a simple example for an implementation in tidal cycles is given. The opportunities for such an approach as well as development possibilities for other live coding languages are discussed. This paper submission is accompanied by a proposal for a performance to test the approaches in a live situation.
 
 ** motivation and scope
 - liveness of live coding performances might be done by playing from scratch
@@ -19,7 +23,6 @@ NAN (not-a-notation) - are petri-nets a suitable frame work for a live-coding no
 - include, embrace interaction of an audience with (prepared) live coding pieces
 - make a concept sketch here
 ** experimental work
-
 *** Petri nets as a suggestion
 - Petri nets are an abstract way of representing flow of information similar to a state machine (LIT)
 - PN are abstract and very concise
@@ -41,4 +44,4 @@ NAN (not-a-notation) - are petri-nets a suitable frame work for a live-coding no
 - give an outlook to a implementation independent from Haskell --> maybe pure data which is visual and can send OSC messages to any other system
 - make clear that this is a very vague proposal which is dependent on others to join in
 - proposed goals: abstract, minimal and accessable
-- give link to github project
+- give link to github project --> [[https://github.com/harte-echtzeit/not-a-notation][link]]
