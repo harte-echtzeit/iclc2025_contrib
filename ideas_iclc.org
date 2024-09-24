@@ -9,10 +9,9 @@ Usually, the "liveness" in live coding performances is either done by playing fr
 This work will explore if and how petri-nets can be utilized as an interface for external input. It will investigate how a meta-language based on petri nets can help to control the flow of a live coding performance, alter its structure and patterns, visualize it and more abstractly serve as a notation. It will be analyzed how it can aid an artist in writing a notation for tracks while also maintaining flexibility for external inputs like an audience, situations and instruments. After an introduction to petri nets, a simple example for an implementation in tidal cycles is given. The opportunities for such an approach as well as development possibilities for other live coding languages are discussed. This paper submission is accompanied by a proposal for a performance to test the approaches in a live situation.
 
 ** motivation and scope
-- liveness of live coding performances might be done by playing from scratch
-- others like to prepare some parts, phrases, songs and use them as a frame to improvise on
-- very rarely, also the audience is included
+Live coding has eveloved as an artistic praxis drastically in terms of approaches, technologies, genres and styles. Apart from technical detail, the increasing number of users has also brought an increasing number of approaches to perform in an actual live situation. However, altough various in their detailed approaches, most performances can be catagorized into two techniques: prepared code and from-scratch. Here, pure from-scratch sessions are similar to improvisation practices in other forms of musical performance which are driven by the artists experience and attention in the moment. Performances which work based on prepared parts such as phrases or song structures are often used to improvise on while the prepared code and ist comments are used as a very raw form of notation. Very rarely, the audience is included in performances by utilizing different interfaces.
 *** prepared parts status-quo
+
 - when using prepared parts, there is no classical notation system available to use in order to describe a piece/song
 - some experimental composers such as Cage or Reich have been using their own systems (cite work here)
 - but nothing common has been available for live coding purposes (check LIT here)
@@ -38,10 +37,12 @@ This work will explore if and how petri-nets can be utilized as an interface for
 *** minimal case study - 2 midi input from audience
 - same as befor but triggered from audience
 ** discussion
-- what is the experience with it and what is maybe not working so great?
+- what is the experience with it and what is maybe not working so
+  great?
 ** summary & outlook
-- answer question from the beginning
-- give an outlook to a implementation independent from Haskell --> maybe pure data which is visual and can send OSC messages to any other system
-- make clear that this is a very vague proposal which is dependent on others to join in
-- proposed goals: abstract, minimal and accessable
-- give link to github project --> [[https://github.com/harte-echtzeit/not-a-notation][link]]
+This work showed briefly that petri-nets can act as an abstract nottion system for live coding. It has been showing that they can be utilized for simple decision making and timing procedures by a basic implementation in Haskell / Tidal Cycles.
+This work is supposed to give only an initial impulse for the topic and leaves therefore a lot of open tasks and questions. Some of them are:
+- Is the proposed notation system capable of beeing used in live and studio situations?
+- Can we utlize a different environment such as Pure Data in order to visualize the notation and act as hub for controlling multiple live codig environments with the notation simultaneously?
+- Is the level of abstraction enough to use it flexible with different live coding languages and is it expressive enough to be digested by an audience as well as by th artists?
+This proposed system is still in an early stage and will be tested during the ICLC 2025 conference in a live performance. Furthermore, the author encourages the reader to play with the code and make adaptions or translations as needed, [[https://github.com/harte-echtzeit/not-a-notation][link]].
