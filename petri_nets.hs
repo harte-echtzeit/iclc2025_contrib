@@ -10,10 +10,10 @@ place in_num curr_num max_num
   | otherwise = True
 
 -- maybe leave out
-trans in_num in_state = if in_state then True else False  
+trans_num in_num in_state = if in_state then True else False  
 
 -- maybe use and perform change of curr_nums in places
-trans_num in_state = if in_state then 1 else 0
+trans in_state = if in_state then 1 else 0
 
 -- example of an resulting place, parametrized (dummy wrapper)
 outP b = place (trans_num (place b b 3)) b 4
