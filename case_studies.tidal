@@ -72,3 +72,35 @@ do
                             (8, 16, n (patChoose 0) # s "superpiano")]
 
 hush
+
+
+--introduce petri nets here
+
+place in_num curr_num max_num
+  | in_num + curr_num <= 0 = False
+  | in_num + curr_num > max_num = False
+  | otherwise = True
+
+-- maybe use and perform change of curr_nums in places
+trans in_state = if in_state then 1 else 0
+
+-- example of an resulting place, parametrized (dummy wrapper)
+linP b = place (trans (place b b 1)) b 1
+
+polyP c = (linP c, linP c)
+
+
+---use the petri net structures in tidal
+
+polyP 2
+
+do
+  let (trigger1, trigger2) = polyP 1
+  -- Trigger a pattern on orbit 0 if trigger1 is True
+  if trigger1
+    then d1 $ s "bd sn" # orbit 0  -- Orbit 0 gets triggered with "bd sn"
+    else d1 $ silence # orbit 0     -- Otherwise silence on orbit 0
+  -- Trigger a pattern on orbit 1 if trigger2 is True
+  if trigger2
+    then d2 $ s "hh cp" # orbit 1  -- Orbit 1 gets triggered with "hh cp"
+    else d2 $ silence # orbit 1     -- Otherwise silence on orbit 1
