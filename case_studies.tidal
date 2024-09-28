@@ -74,7 +74,7 @@ do
 hush
 
 
---introduce petri nets here
+--introduce petri nets here DEFs
 
 place in_num curr_num max_num
   | in_num + curr_num <= 0 = False
@@ -87,20 +87,84 @@ trans in_state = if in_state then 1 else 0
 -- example of an resulting place, parametrized (dummy wrapper)
 linP b = place (trans (place b b 1)) b 1
 
-polyP c = (linP c, linP c)
 
 
----use the petri net structures in tidal
+--- >>>> A) example one: simple switch
 
-polyP 2
+let iclc = "9 3 12 3"
+    twentyFive = "2 0 2 5"
+
+-- a simple boolean pattern switch
+patChoose x = if x then iclc else twentyFive
+
+musicalAction pat_in =
+  d1 $ fast 2
+  $ note pat_in
+  # s "bass3"
+  # cut 1
 
 do
-  let (trigger1, trigger2) = polyP 1
-  -- Trigger a pattern on orbit 0 if trigger1 is True
-  if trigger1
-    then d1 $ s "bd sn" # orbit 0  -- Orbit 0 gets triggered with "bd sn"
-    else d1 $ silence # orbit 0     -- Otherwise silence on orbit 0
-  -- Trigger a pattern on orbit 1 if trigger2 is True
-  if trigger2
-    then d2 $ s "hh cp" # orbit 1  -- Orbit 1 gets triggered with "hh cp"
-    else d2 $ silence # orbit 1     -- Otherwise silence on orbit 1
+  let trig = linP 1
+  musicalAction (patChoose trig)
+
+
+
+
+--- B) example two: choice between multiple out puts
+
+import System.Random (randomRIO)
+
+randomTrigger :: IO Int
+randomTrigger = randomRIO (0 :: Int,1 :: Int)  -- Randomly choose 1 or 2
+
+-- a tuple of two linear petri-net options
+polyP c d = (linP c, linP d)
+
+
+musicalAction trig1 trig2
+ | trig1 && trig2 = do
+      d1 $ s "bd sd ~ bd"  -- First pattern triggered on d1
+      d2 $ s "hh*3 cp"     -- Second pattern triggered on d2
+  | trig1 = do
+      d1 $ s "bd sd ~ bd"
+      d2 $ silence
+  | trig2 = do
+      d2 $ s "hh*3 cp"
+      d1 $ silence
+  | otherwise = do
+      d1 $ silence
+      d2 $ silence
+
+
+--- random version         
+do
+  a <- randomTrigger
+  b <- randomTrigger
+  print(a, b)
+  let (track1, track2) = polyP a b
+  musicalAction track1 track2
+
+
+-- user defined version
+do
+  let (track1, track2) = polyP 0 0
+  musicalAction track1 track2
+
+
+
+--- C) recursive eecution of a musical action
+import Control.Concurrent
+
+-- calculate the cycle time based on the standard CPS rate
+cycTime = round(1/0.5625)
+
+musicalAction num = if num > 0
+  then do
+    d1 $ s "bd clubkick bd sn"
+    threadDelay (cycTime * 1000000)
+    d1 $ silence
+    musicalAction (num-1)
+  else d1 $ silence
+
+do
+  musicalAction 5
