@@ -1,0 +1,144 @@
+-- 2024-11-11 this will be a file just sumarizing the basic building blocks of the NaN structures based on 'case_studies.tidal'
+-- it will be accompanied by a separate script to jam and play with them
+-- to be done: clean up and comment fucntions
+
+
+-- a simple case study for the petri net >> notation test
+
+--introduce petri nets here DEFs
+
+-- alternative definition (legacy)
+-- place in_num curr_num max_num
+--  | in_num + curr_num <= 0 = False
+--  | in_num + curr_num > max_num = False
+--  | otherwise = True
+
+place in_num max_num = if in_num > 0 && in_num <= max_num then True else False
+
+-- maybe use and perform change of curr_nums in places
+trans in_state = if in_state then 1 else 0
+
+
+--- >>>> A) example one: simple switch
+
+-- example of an resulting place, parametrized (dummy wrapper)
+linP b = place (trans (place b 1)) 1
+
+let iclc = "9 3 12 3"
+    twentyFive = "2 0 2 5"
+
+-- a simple boolean pattern switch
+patChoose x = if x then iclc else twentyFive
+
+musicalActionA pat_in =
+  d1 $ fast 2
+  $ note pat_in
+  # s "bass3"
+  # cut 1
+  # gain 0.9
+
+-- actual petri-net operation
+do
+  let trig = linP 0
+  musicalActionA (patChoose trig)
+
+
+
+
+--- B) example two: choice/trigger between/of multiple outputs
+
+-- resulting place as a tuple of two linear petri-net options
+polyP c d = (linP c, linP d)
+
+import System.Random (randomRIO)
+
+randomTrigger :: IO Int
+randomTrigger = randomRIO (0 :: Int,1 :: Int)  -- Randomly choose 1 or 2
+
+musicalActionB trig1 trig2
+ | trig1 && trig2 = do
+      d2 $ s "bd sd ~ bd" 
+      d3 $ s "hh*3 cp"     
+  | trig1 = do
+      d2 $ s "bd sd ~ bd"
+      d3 $ silence
+  | trig2 = do
+      d3 $ s "hh*3 cp"
+      d2 $ silence
+  | otherwise = do
+      d2 $ silence
+      d3 $ silence
+
+
+--- random choice         
+do
+  a <- randomTrigger
+  b <- randomTrigger
+  print(a, b)
+  let (track1, track2) = polyP a b
+  musicalActionB track1 track2
+
+
+-- user defined choice
+do
+  let (track1, track2) = polyP 0 0
+  musicalActionB track1 track2
+
+
+
+--- C) recursive eecution of a musical action
+import Control.Concurrent
+
+-- calculate the cycle time based on the standard CPS rate
+cycTime = round(1/0.5625)
+
+-- transition is here defined as a list accounting for multiple tokens which can be transmitted
+trList :: Int -> Bool -> [Int]
+trList in_num in_state
+  | in_num <= 0 = []
+  | otherwise = 1 : trList (in_num - 1) (p (in_num - 1) (in_num - 1))
+
+-- define some music we want to play
+musicalActionC :: Int -> IO ()
+musicalActionC x
+  | x==1 = do
+      once $ fast 2 $ stack[s "bd cp bd sd",
+                            note iclc # s "bass3" # cut 1 # gain 0.8]
+      waitHere
+  | otherwise = do
+      once $ fast 2 $ stack[s "hh*8",
+                            note twentyFive # s "bass3" # cut 1 # gain 0.8]
+      waitHere
+  where waitHere = threadDelay (cycTime * 1000000)
+
+
+-- define a resulting place where multiple tokens are beeing excepted recursively and musical actions are beeing triggered from it (enables also some switching, if desired)
+
+playPiece [] = d1 $ silence
+playPiece x
+  | head x==1 = do
+      musicalActionC 1
+      playPiece (tail x)
+  | otherwise = do
+      musicalActionC 2
+      playPiece (tail x)
+
+
+do
+  let token = 2
+      times = trList token (place (token-1) token)
+  playPiece times
+
+do
+  let timesM = [0,0,1,0]
+  playPiece timesM
+  playPiece [1,1,0,1]
+
+
+
+
+
+
+
+
+

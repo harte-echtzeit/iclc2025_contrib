@@ -1,0 +1,5 @@
+* ICLC 2025 submission
+This is the repo for my submission to ICLC2025 in Barcelona. It is mainly concerned with my paper submission called /NaN (Not-a-Notation) - can petri-nets be utilized as an interactive notation for live coding?/ but also has the submission document for the accompanying live performance. It is structured as follows.
+** code and concept
+The main part of this work is conceptualised in the file ~ideas_iclc.org~  and from there code was first derived in ~petri_nets.hs~. The Haskell functions were finally transformed into a sample script for Tidal Cycles called ~case_studies.tidal~ which was sonically tested and is also represented within the paper. 
+** paper and documents

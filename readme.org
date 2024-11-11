@@ -1,0 +1,17 @@
+* ICLC 2025 submission
+This is the repo for my submission to [[https://iclc.toplap.org/2025/][ICLC2025]] in Barcelona. It is mainly concerned with my paper submission called /NaN (Not-a-Notation) - can petri-nets be utilized as an interactive notation for live coding?/ but also contains the submission document for the accompanying live performance.
+The main idea of the paper is the usage of so-called [[https://en.wikipedia.org/wiki/Petri_net][Petri-nets]] for the temporal flow manipulation of live coded art and music in particular. It analysis if and how these structures can be used as a abstract notation in live coding.
+It is structured as follows.
+** code and concept
+The main part of this work is conceptualised in the file ~ideas_iclc.org~  which is a sketch of my thought processes. From there, code was first developed in ~petri_nets.hs~. The Haskell functions were finally transformed into a sample script for Tidal Cycles called ~case_studies.tidal~ which was sonically tested and is also represented within the paper. 
+** paper and documents
+The main paper was witten in markdown according to the ICLC 2025 template and was finally converted into a ~.pdf~ file. It contains a write up of all ideas and some code snippets and can be found in ~/paper/my_submission/~.
+** future work and open
+A lot of ideas and work could not be implemented for the paper submission deadline and will be worked on during the months leading to the conference. These things will be separated in the folder ~/errata.~
+
+Some ideas are in no particular order:
+- [ ] connection of a MIDI devices for control
+- [ ] implementation of more basic building blocks
+- [ ] example 'songs' using NaN
+- [ ] visual implementation e.g. in Pd
+- [ ] refine token-flow
