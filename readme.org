@@ -10,8 +10,8 @@ The main paper was witten in markdown according to the ICLC 2025 template and wa
 A lot of ideas and work could not be implemented for the paper submission deadline and will be worked on during the months leading to the conference. These things will be separated in the folder ~/errata.~
 
 Some ideas are in no particular order:
-- [ ] connection of a MIDI devices for control
-- [ ] implementation of more basic building blocks
-- [ ] example 'songs' using NaN
-- [ ] visual implementation e.g. in Pd
-- [ ] refine token-flow
+- [  ] connection of a MIDI devices for control
+- [  ] implementation of more basic building blocks
+- [  ] example 'songs' using NaN
+- [  ] visual implementation e.g. in Pd
+- [  ] refine token-flow
